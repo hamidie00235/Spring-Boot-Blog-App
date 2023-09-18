@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class PostDto {
-    private String resourceName;
-    private String fieldName;
-    private String fieldValue;
+    private Long id;
+    private String title;
+    private String description;
+    private String content;
 }
