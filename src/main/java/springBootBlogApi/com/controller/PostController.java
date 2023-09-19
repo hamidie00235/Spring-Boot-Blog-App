@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import springBootBlogApi.com.payLoad.PostDto;
 import springBootBlogApi.com.service.PostService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
@@ -18,5 +20,10 @@ public class PostController {
     @PostMapping
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
+    }
+    // get all posts
+    @GetMapping
+    public List<PostDto> getAllPosts(){
+        return postService.getAllPosts();
     }
 }
