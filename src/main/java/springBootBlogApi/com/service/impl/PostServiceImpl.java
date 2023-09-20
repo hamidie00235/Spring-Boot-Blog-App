@@ -2,6 +2,7 @@ package springBootBlogApi.com.service.impl;
 
 import org.springframework.stereotype.Service;
 import springBootBlogApi.com.entity.Post;
+import springBootBlogApi.com.exception.ResourceNotFoundException;
 import springBootBlogApi.com.payLoad.PostDto;
 import springBootBlogApi.com.repository.PostRepository;
 import springBootBlogApi.com.service.PostService;
@@ -38,6 +39,13 @@ public class PostServiceImpl implements PostService {
  List<Post> posts=postRepository.findAll();
         return posts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
     }
+
+    @Override
+    public PostDto getPostById(Long id) {
+        Post post =postRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("post","id",id));
+        return mapToDto(post);
+    }
+
     // convert Entity to Dto
     private PostDto mapToDto(Post post){
         PostDto postDto=new PostDto();
