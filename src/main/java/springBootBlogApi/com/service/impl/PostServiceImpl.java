@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import springBootBlogApi.com.entity.Post;
 import springBootBlogApi.com.exception.ResourceNotFoundException;
 import springBootBlogApi.com.payLoad.PostDto;
+import springBootBlogApi.com.payLoad.PostResponse;
 import springBootBlogApi.com.repository.PostRepository;
 import springBootBlogApi.com.service.PostService;
 
@@ -39,7 +40,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     // pagination step 3
-    public List<PostDto> getAllPosts(int pageNo,int pageSize) {
+    public  PostResponse getAllPosts(int pageNo,int pageSize) {
         // create pageable instance step4
    Pageable pageable = PageRequest.of(pageNo,pageSize);
 Page<Post> posts=postRepository.findAll(pageable);
@@ -49,7 +50,17 @@ Page<Post> posts=postRepository.findAll(pageable);
 
 
 
-        return listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+     List<PostDto>  content=listOfPosts.stream().map(post -> mapToDto(post)).collect(Collectors.toList());
+
+     PostResponse postResponse= new PostResponse();
+
+     postResponse.setContent(content);
+     postResponse.setPageNo(posts.getNumber());
+     postResponse.setPageSizce(posts.getSize());
+     postResponse.setTotalElements(posts.getTotalElements());
+     postResponse.setTotalPages(posts.getTotalPages());
+     postResponse.setLast(posts.isLast());
+     return  postResponse;
     }
 
     @Override
