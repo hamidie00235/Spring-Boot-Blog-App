@@ -21,10 +21,13 @@ public class PostController {
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
     }
-    // get all posts
+    // get all posts and pagination step1
     @GetMapping
-    public List<PostDto> getAllPosts(){
-        return postService.getAllPosts();
+    public List<PostDto> getAllPosts(
+            @RequestParam(value ="pageNo" ,defaultValue = "0",required = false) int pageNo,
+            @RequestParam(value="pageSize" ,defaultValue = "10" ,required = false) int pageSize
+    ){
+        return postService.getAllPosts( pageNo ,pageSize);
     }
     // Get Post by id
     @GetMapping("/{id}")
