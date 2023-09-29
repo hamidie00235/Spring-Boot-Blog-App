@@ -10,6 +10,9 @@ import springBootBlogApi.com.repository.PostRepository;
 import springBootBlogApi.com.service.CommentService;
 
 import java.rmi.NotBoundException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
@@ -38,6 +41,16 @@ public class CommentServiceImpl implements CommentService {
 
         return mapToDto(newComment);
     }
+
+    @Override
+    public List<CommentDto> getCommentsByPostId(Long postId) {
+        // Retrieve comments by postId
+
+        List<Comment> comments=commentRepository.findByPostId(postId);
+      // convet list of comment entities to list of comment dto's
+        return comments.stream().map(comment -> mapToDto(comment)).collect(Collectors.toList());
+    }
+
     // convert Entity to Dto
     private CommentDto mapToDto(Comment comment){
 
