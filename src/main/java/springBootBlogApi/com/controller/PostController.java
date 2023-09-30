@@ -8,8 +8,6 @@ import springBootBlogApi.com.payLoad.PostResponse;
 import springBootBlogApi.com.service.PostService;
 import springBootBlogApi.com.utils.AppConstants;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {

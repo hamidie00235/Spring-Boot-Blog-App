@@ -3,8 +3,6 @@ package springBootBlogApi.com.service;
 import springBootBlogApi.com.payLoad.PostDto;
 import springBootBlogApi.com.payLoad.PostResponse;
 
-import java.util.List;
-
 public interface PostService {
  PostDto createPost(PostDto postDto);
  //pagination step 2
