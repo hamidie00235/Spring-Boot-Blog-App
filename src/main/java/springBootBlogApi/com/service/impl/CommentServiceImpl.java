@@ -1,5 +1,6 @@
 package springBootBlogApi.com.service.impl;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import springBootBlogApi.com.exception.ResourceNotFoundException;
@@ -19,10 +20,11 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
 
-
-    public CommentServiceImpl(CommentRepository commentRepository,PostRepository postRepository) {
+    private ModelMapper mapper;
+    public CommentServiceImpl(CommentRepository commentRepository,PostRepository postRepository,ModelMapper mapper) {
         this.commentRepository = commentRepository;
         this.postRepository=postRepository;
+        this.mapper=mapper;
     }
 
     @Override
@@ -117,22 +119,26 @@ public class CommentServiceImpl implements CommentService {
 
     // convert Entity to Dto
     private CommentDto mapToDto(Comment comment){
+      CommentDto commentDto=mapper.map(comment,CommentDto.class);
 
-        CommentDto commentDto=new CommentDto();
-        commentDto.setId(comment.getId());
-        commentDto.setName(comment.getName());
-        commentDto.setEmail(comment.getEmail());
-        commentDto.setBody(comment.getBody());
+//        CommentDto commentDto=new CommentDto();
+//        commentDto.setId(comment.getId());
+//        commentDto.setName(comment.getName());
+//        commentDto.setEmail(comment.getEmail());
+//        commentDto.setBody(comment.getBody());
 return commentDto;
 
     }
     //convert Dto to Entity
     private Comment mapToEntity(CommentDto commentDto){
-        Comment comment =new Comment();
-        comment.setId(commentDto.getId());
-        comment.setName(commentDto.getName());
-        comment.setEmail(commentDto.getEmail());
-        comment.setBody(commentDto.getBody());
+        Comment comment=mapper.map(commentDto,Comment.class);
+//
+//        Comment comment =new Comment();
+//        comment.setId(commentDto.getId());
+//        comment.setName(commentDto.getName());
+//        comment.setEmail(commentDto.getEmail());
+//        comment.setBody(commentDto.getBody());
+
         return  comment;
     }
 }
