@@ -2,16 +2,15 @@ package springBootBlogApi.com.service.impl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import springBootBlogApi.com.exception.ResourceNotFoundException;
+import springBootBlogApi.com.payLoad.CommentDto;
+import springBootBlogApi.com.repository.PostRepository;
+import springBootBlogApi.com.service.CommentService;
 import springBootBlogApi.com.entity.Comment;
 import springBootBlogApi.com.entity.Post;
 import springBootBlogApi.com.exception.BlogAPIException;
-import springBootBlogApi.com.exception.ResourceNotFoundException;
-import springBootBlogApi.com.payLoad.CommentDto;
 import springBootBlogApi.com.repository.CommentRepository;
-import springBootBlogApi.com.repository.PostRepository;
-import springBootBlogApi.com.service.CommentService;
 
-import java.rmi.NotBoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
     private PostRepository postRepository;
+
 
     public CommentServiceImpl(CommentRepository commentRepository,PostRepository postRepository) {
         this.commentRepository = commentRepository;
