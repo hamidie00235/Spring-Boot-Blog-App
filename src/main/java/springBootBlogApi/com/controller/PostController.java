@@ -13,10 +13,12 @@ import springBootBlogApi.com.utils.AppConstants;
 @RequestMapping("/api/posts")
 public class PostController {
     private PostService postService;
+    // mapping post entity to post dto
     private ModelMapper mapper;
 
     public PostController(PostService postService,
                           ModelMapper mapper) {
+
         this.postService = postService;
         this.mapper=mapper;
     }
