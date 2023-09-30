@@ -42,6 +42,7 @@ public class CommentController {
     }
 
     // update comment by id rest api
+
     @PutMapping("/posts/{postId}/comments/{id}")
     public ResponseEntity<CommentDto> updateComment(@PathVariable(value = "postId") Long postId,
 

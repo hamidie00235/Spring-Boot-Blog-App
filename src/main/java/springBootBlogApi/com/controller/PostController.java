@@ -1,5 +1,6 @@
 package springBootBlogApi.com.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +13,12 @@ import springBootBlogApi.com.utils.AppConstants;
 @RequestMapping("/api/posts")
 public class PostController {
     private PostService postService;
+    private ModelMapper mapper;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService,
+                          ModelMapper mapper) {
         this.postService = postService;
+        this.mapper=mapper;
     }
     // create blog post
     @PostMapping
