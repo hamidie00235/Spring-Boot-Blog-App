@@ -1,5 +1,6 @@
 package springBootBlogApi.com.controller;
 
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PostController {
     }
     // create blog post
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto) {
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto) {
         return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
     }
     // get all posts and pagination step1
@@ -44,7 +45,7 @@ public class PostController {
     }
     //update post by id rest api
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost (@RequestBody PostDto postDto, @PathVariable(name="id")Long id){
+    public ResponseEntity<PostDto> updatePost (@Valid @RequestBody PostDto postDto, @PathVariable(name="id")Long id){
         PostDto postResponse=postService.updatePost(postDto, id);
         return new ResponseEntity<>(postResponse,HttpStatus.OK);
     }
