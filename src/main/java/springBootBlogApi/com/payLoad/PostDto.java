@@ -21,6 +21,7 @@ public class PostDto {
     private String description;
     //content should not be nul or empty
     @NotEmpty
+
     private String content;
     private Set<CommentDto> comments;
 }
