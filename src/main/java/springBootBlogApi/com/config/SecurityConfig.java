@@ -46,6 +46,8 @@ public AuthenticationManager authenticationManager(AuthenticationConfiguration c
                 .authorizeHttpRequests((authorize)->
 //                        authorize.anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
                         authorize.requestMatchers(HttpMethod.GET,"/api/**").permitAll()
+
+                                .requestMatchers("/api/auth/**").permitAll()
                                 .anyRequest().authenticated()).httpBasic(Customizer.withDefaults());
 
         return http.build();
